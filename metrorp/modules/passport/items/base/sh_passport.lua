@@ -17,7 +17,7 @@ ITEM.functions.Write = {
 		return false
 	end,
 	onCanRun = function(item)
-		local class = nut.class.list[item.player:getChar():getClass()]
+		local class = lia.class.list[item.player:getChar():getClass()]
 		return ((class.name == "Hanseatic League" && item.faction == "hanza") || (class.name == "Red Line" && item.faction == "redline") || (class.name == "Fourth Reich" && item.faction == "reich") || (class.name == "Leninsky Prospekt Militia" && item.faction == "militia") == true)
 	end,
 	icon = "icon16/book_edit.png"
@@ -36,7 +36,7 @@ ITEM.functions.Read = {
 }
 
 net.Receive("OpenPassport", function(len, client)
-	local item = nut.item.instances[net.ReadUInt(32)]
+	local item = lia.item.instances[net.ReadUInt(32)]
 
 		local background = Material("vgui/passports/passport_"..item.faction..".png", "noclamp smooth")
 		local frame = vgui.Create("DFrame")
@@ -108,7 +108,7 @@ net.Receive("OpenPassport", function(len, client)
 end)
 
 net.Receive("nutMetroPassportSend", function(len, client)
-	local item = nut.item.instances[id]
+	local item = lia.item.instances[id]
 	local name = net.ReadString()
 	local dob = net.ReadString()
 	local sex = net.ReadString()

@@ -4,7 +4,7 @@ ENT.Category = "NutScript"
 ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.invType = "camera"
-nut.item.registerInv(ENT.invType, 1, 1)
+lia.item.registerInv(ENT.invType, 1, 1)
 
 if (SERVER) then
 	function ENT:Initialize()
@@ -20,7 +20,7 @@ if (SERVER) then
 			physObject:Wake()
 		end
 
-		nut.item.newInv(0, self.invType, function(inventory)
+		lia.item.newInv(0, self.invType, function(inventory)
 			self:setInventory(inventory)
 			inventory.noBags = true
 
@@ -88,14 +88,14 @@ if (SERVER) then
 	function ENT:OnRemove()		
 		local index = self:getNetVar("id")
 
-		if (!nut.shuttingDown and !self.nutIsSafe and index) then
-			local item = nut.item.inventories[index]
+		if (!lia.shuttingDown and !self.nutIsSafe and index) then
+			local item = lia.item.inventories[index]
 
 			if (item) then
-				nut.item.inventories[index] = nil
+				lia.item.inventories[index] = nil
 
-				nut.db.query("DELETE FROM nut_items WHERE _invID = "..index)
-				nut.db.query("DELETE FROM nut_inventories WHERE _invID = "..index)
+				lia.db.query("DELETE FROM nut_items WHERE _invID = "..index)
+				lia.db.query("DELETE FROM nut_inventories WHERE _invID = "..index)
 
 				hook.Run("StorageItemRemoved", self, item)
 			end
@@ -103,7 +103,7 @@ if (SERVER) then
 	end
 
 	function ENT:getInv()
-		return nut.item.inventories[self:getNetVar("id", 0)]
+		return lia.item.inventories[self:getNetVar("id", 0)]
 	end
 
 	netstream.Hook("camCapture", function(client, entity)
@@ -118,8 +118,8 @@ else
 
 	local toScreen = FindMetaTable("Vector").ToScreen
 	local colorAlpha = ColorAlpha
-	local drawText = nut.util.drawText
-	local configGet = nut.config.get
+	local drawText = lia.util.drawText
+	local configGet = lia.config.get
 
 	function ENT:onDrawEntityInfo(alpha)
 		local position = toScreen(self.LocalToWorld(self, self.OBBCenter(self)))

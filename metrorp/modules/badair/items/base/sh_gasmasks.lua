@@ -221,7 +221,7 @@ ITEM.functions.Filter = {
 			local target
 
 			if (data) then
-				target = nut.item.instances[data]
+				target = lia.item.instances[data]
 				
 				if (!items[target.id]) then
 					return false -- stop hacking you dumb fuck

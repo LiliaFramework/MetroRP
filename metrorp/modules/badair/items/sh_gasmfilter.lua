@@ -24,7 +24,7 @@ end
 
 ITEM.functions.combine = {
     onCanRun = function(item, datao)
-        local targetItem = nut.item.instances[data]
+        local targetItem = lia.item.instances[data]
         
         if (data and targetItem) then
             -- Yeah, You can't see me when item is dropped on the ground!
@@ -37,7 +37,7 @@ ITEM.functions.combine = {
         local client = item.player
 
         if (IsValid(client)) then
-            local targetItem = nut.item.instances[data]
+            local targetItem = lia.item.instances[data]
 
             if (targetItem) then
                 if (targetItem.isGasMask) then

@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------------------------------
 MODULE.name = "Class Stats"
-MODULE.author = "Stan/Leonheart#7476"
+MODULE.author = "STEAM_0:1:176123778"
 MODULE.desc = "Allows class stats to be set and applied"
 --------------------------------------------------------------------------------------------------------
 lia.util.include("sv_module.lua")

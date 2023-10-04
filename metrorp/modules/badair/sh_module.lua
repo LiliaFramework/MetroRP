@@ -1,8 +1,8 @@
-local PLUGIN = PLUGIN
-PLUGIN.name = "Bad Air Remastered"
-PLUGIN.author = "Black Tea (Additions by dickmosi)"
-PLUGIN.desc = "Remastered Bad Air Plugin"
-PLUGIN.toxicAreas = PLUGIN.toxicAreas or {}
+local MODULE = MODULE
+MODULE.name = "Bad Air Remastered"
+MODULE.author = "Black Tea (Additions by dickmosi)"
+MODULE.desc = "Remastered Bad Air Plugin"
+MODULE.toxicAreas = MODULE.toxicAreas or {}
 
 DEFAULT_GASMASK_HEALTH = 100
 DEFAULT_GASMASK_FILTER = 600
@@ -56,7 +56,7 @@ do
 		txtFail = "<color=192, 57, 43>Empty",
 	}
 
-	table.Merge(nut.lang.stored[langkey], langTable)
+	table.Merge(lia.lang.stored[langkey], langTable)
 end
 
 langkey = "korean"
@@ -86,7 +86,7 @@ do
 		txtFail = "<color=192, 57, 43>비어있음",
 	}
 
-	table.Merge(nut.lang.stored[langkey], langTable)
+	table.Merge(lia.lang.stored[langkey], langTable)
 end
 
 local PLAYER = FindMetaTable("Player")
@@ -108,14 +108,14 @@ if (CLIENT) then
 			client:getChar() and
 			client:getGasMask() and
 			!client:ShouldDrawLocalPlayer() and
-			(!nut.gui.char or !nut.gui.char:IsVisible())
+			(!lia.gui.char or !lia.gui.char:IsVisible())
 		)
 	end
 
 	shtrPos = {}
 
 	-- Draw the Gas Mask Overlay. But other essiential stuffs must be visible.
-	function PLUGIN:HUDPaintBackground()
+	function MODULE:HUDPaintBackground()
 		if (canEffect(LocalPlayer())) then
 			w, h = ScrW(), ScrH()
 			gw, gh = h/1*2, h
@@ -139,7 +139,7 @@ if (CLIENT) then
 		end
 	end
 
-	function PLUGIN:Think()
+	function MODULE:Think()
 		local client = LocalPlayer()
 		local item = client:getGasMask()
 
@@ -170,7 +170,7 @@ if (CLIENT) then
 
 	netstream.Hook("nutMaskOn", function(id, health)
 		local client = LocalPlayer()
-		local item = nut.item.instances[id]
+		local item = lia.item.instances[id]
 
 		if (item) then
 			local crackNums = math.Round((1 - health/DEFAULT_GASMASK_HEALTH)*6)
@@ -196,7 +196,7 @@ if (CLIENT) then
 		addCrack()
 	end)
 else
-	function PLUGIN:PlayerLoadedChar(client, character, lastChar)
+	function MODULE:PlayerLoadedChar(client, character, lastChar)
 		if (character) then
 			local inv = character:getInv()
 			local items = inv:getItems()
@@ -224,7 +224,7 @@ else
 		end
 	end
 
-	function PLUGIN:PlayerDeath(client)
+	function MODULE:PlayerDeath(client)
 		local item = client:getGasMask()
 
 		if (item and item.isGasMask) then
@@ -256,24 +256,24 @@ else
 		return minVector, maxVector
 	end
 
-	nut.badair = nut.badair or {}
+	lia.badair = lia.badair or {}
 
 	-- get all bad air area.
-	function nut.badair.getAll()
-		return PLUGIN.toxicAreas
+	function lia.badair.getAll()
+		return MODULE.toxicAreas
 	end
 
 	-- Add toxic bad air area.
-	function nut.badair.addArea(vMin, vMax)
+	function lia.badair.addArea(vMin, vMax)
 		vMin, vMax = sortVector(vMin, vMax)
 
 		if (vMin and vMax) then
-			table.insert(PLUGIN.toxicAreas, {vMin, vMax})
+			table.insert(MODULE.toxicAreas, {vMin, vMax})
 		end
 	end
 
 	-- This hook simulates the damage of the Gas Mask.
-	function PLUGIN:EntityTakeDamage(client, dmgInfo)
+	function MODULE:EntityTakeDamage(client, dmgInfo)
 		if (client and client:IsPlayer()) then
 			local item = client:getGasMask()
 			local char = client:getChar()
@@ -293,12 +293,12 @@ else
 		end
 	end
 
-	function PLUGIN:SaveData()
-		self:setData(nut.badair.getAll())
+	function MODULE:SaveData()
+		self:setData(lia.badair.getAll())
 	end
 	
-	function PLUGIN:LoadData()
-		PLUGIN.toxicAreas = self:getData()
+	function MODULE:LoadData()
+		MODULE.toxicAreas = self:getData()
 	end
 
 	-- This timer does the effect of bad air.
@@ -308,7 +308,7 @@ else
 			local clientPos = client:GetPos() + client:OBBCenter()
 			client.currentArea = nil
 
-			for index, vec in ipairs((nut.badair.getAll() or {})) do
+			for index, vec in ipairs((lia.badair.getAll() or {})) do
 				if (clientPos:WithinAABox(vec[1], vec[2])) then
 					if (client:IsAdmin()) then
 						client.currentArea = index
@@ -352,12 +352,12 @@ else
 		end
 
 		client:notify(L("badairAdded", client))
-		nut.badair.addArea(v1, v2)
+		lia.badair.addArea(v1, v2)
 	end)
 end
 
 -- This hook is for my other plugin, "Grenade" Plugin.
-function PLUGIN:CanPlayerTearGassed(client)
+function MODULE:CanPlayerTearGassed(client)
 	local item = client:getGasMask()
 
 	if (!item) then 
@@ -376,7 +376,7 @@ function PLUGIN:CanPlayerTearGassed(client)
 end
 
 -- If the player is wearing Gas Mask, His some voice should be muffled a bit.
-function PLUGIN:EntityEmitSound(sndTable)
+function MODULE:EntityEmitSound(sndTable)
 	local client = sndTable.Entity
 	if (client and IsValid(client) and client:IsPlayer()) then
 		local item = client:getGasMask()
@@ -393,7 +393,7 @@ function PLUGIN:EntityEmitSound(sndTable)
 	end
 end
 
-nut.command.add("badairadd", {
+lia.command.add("badairadd", {
 	syntax = "",
 	adminOnly = true,
 	onRun = function(client, arguments)
@@ -409,7 +409,7 @@ nut.command.add("badairadd", {
 			local vMax = pos
 
 			netstream.Start(client, "displayPosition", pos)
-			nut.badair.addArea(vMin, vMax)
+			lia.badair.addArea(vMin, vMax)
 
 			client:setNetVar("badairMin", nil, client)
 			client:notify(L("badairAdded", client))
@@ -417,14 +417,14 @@ nut.command.add("badairadd", {
 	end
 })
 
-nut.command.add("badairremove", {
+lia.command.add("badairremove", {
 	syntax = "",
 	adminOnly = true,
 	onRun = function(client, arguments)
 		if (client.currentArea) then
 			client:notify(L("badairRemoved", client))
 
-			table.remove(PLUGIN.toxicAreas, client.currentArea)	
+			table.remove(MODULE.toxicAreas, client.currentArea)	
 		else
 			client:notify(L("badairBeArea", client))
 		end

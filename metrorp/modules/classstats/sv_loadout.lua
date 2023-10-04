@@ -1,13 +1,11 @@
 --------------------------------------------------------------------------------------------------------
 function MODULE:doLoadout(client)
     local char = client:getChar()
-
     if char then
         local charClass = char:getClass()
         local class = lia.class.list[charClass]
         if not class then return end
         if class.None then return end
-
         if class.armor then
             client:SetArmor(class.armor)
         else

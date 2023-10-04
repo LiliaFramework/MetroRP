@@ -1,9 +1,9 @@
-PLUGIN.name = "NightVision"
-PLUGIN.author = "CaptJack92a, Neon (Porting and Rewriting)"
-PLUGIN.desc = "Adds a simple wearable item that toggles on a night vision mode."
+MODULE.name = "NightVision"
+MODULE.author = "CaptJack92a, Neon (Porting and Rewriting)"
+MODULE.desc = "Adds a simple wearable item that toggles on a night vision mode."
 
 if CLIENT then
-	function PLUGIN:HUDPaint()
+	function MODULE:HUDPaint()
 		if LocalPlayer():getNetVar("nvision", false) then
 			local col = {}
 			col["$pp_colour_addr"] = 0.1

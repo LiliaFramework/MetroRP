@@ -172,7 +172,7 @@ ITEM.functions.Equip = {
 
 		for k, v in pairs(items) do
 			if (v.id != item.id) then
-				local itemTable = nut.item.instances[v.id]
+				local itemTable = lia.item.instances[v.id]
 
 				if (itemTable.pacData and v.outfitCategory == item.outfitCategory and itemTable:getData("equip")) then
 					item.player:notify("You're already equipping this kind of outfit")
@@ -308,7 +308,7 @@ ITEM.functions.Filter = {
 			local target
 
 			if (data) then
-				target = nut.item.instances[data]
+				target = lia.item.instances[data]
 				
 				if (!items[target.id]) then
 					return false -- stop hacking you dumb fuck

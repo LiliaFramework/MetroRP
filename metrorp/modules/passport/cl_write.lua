@@ -55,7 +55,7 @@ function PANEL:Init()
 	self.issued:SetPos(640, 288)
 	self.issued:SetSize(178, 20)
 	self.issued:SetFont("nutGenericFont")
-	self.issued:SetText(os.date(format, nut.date.get()))
+	self.issued:SetText(os.date(format, lia.date.get()))
 	self.issued:SetTextColor(color_black)
 
 	self.info = self:addNoteEditor("note")

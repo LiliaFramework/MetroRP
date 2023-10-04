@@ -1,6 +1,6 @@
-PLUGIN.name = "Camera"
-PLUGIN.author = "Pilot"
-PLUGIN.desc = "Take pictures like in the olden days."
+MODULE.name = "Camera"
+MODULE.author = "Pilot"
+MODULE.desc = "Take pictures like in the olden days."
 
 local entityMeta = FindMetaTable("Entity")
 
@@ -12,26 +12,26 @@ end
 
 if (CLIENT) then
 	netstream.Hook("camOpen", function(entity, index)
-		local inventory = nut.item.inventories[index]
+		local inventory = lia.item.inventories[index]
 
 		if (IsValid(entity) and inventory and inventory.slots) then
-			nut.gui.inv1 = vgui.Create("nutInventory")
-			nut.gui.inv1:ShowCloseButton(true)
+			lia.gui.inv1 = vgui.Create("nutInventory")
+			lia.gui.inv1:ShowCloseButton(true)
 
 			local inventory2 = LocalPlayer():getChar():getInv()
 
 			if (inventory2) then
-				nut.gui.inv1:setInventory(inventory2)
+				lia.gui.inv1:setInventory(inventory2)
 			end
 
 			local panel = vgui.Create("nutInventory")
 			panel:ShowCloseButton(true)
 			panel:SetTitle("Player")
 			panel:setInventory(inventory)
-			panel:MoveLeftOf(nut.gui.inv1, 4)
+			panel:MoveLeftOf(lia.gui.inv1, 4)
 			panel.OnClose = function(this)
-				if (IsValid(nut.gui.inv1) and !IsValid(nut.gui.menu)) then
-					nut.gui.inv1:Remove()
+				if (IsValid(lia.gui.inv1) and !IsValid(lia.gui.menu)) then
+					lia.gui.inv1:Remove()
 				end
 
 				netstream.Start("invExit")
@@ -87,11 +87,11 @@ if (CLIENT) then
 				end
 			end
 
-			nut.gui["inv"..index] = panel
+			lia.gui["inv"..index] = panel
 		end
 	end)
 else
-	function PLUGIN:LoadData()
+	function MODULE:LoadData()
 		local savedTable = self:getData() or {}
 
 		for k, v in ipairs(savedTable) do
@@ -103,7 +103,7 @@ else
 		end
 	end
 
-	function PLUGIN:SaveData()
+	function MODULE:SaveData()
 		local savedTable = {}
 
 		for k, v in ipairs(ents.GetAll()) do

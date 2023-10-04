@@ -1,6 +1,6 @@
-PLUGIN.name = "Cassette Player"
-PLUGIN.author = "Pilot"
-PLUGIN.desc = "Collect cassette's and listen to your favorite tunes."
+MODULE.name = "Cassette Player"
+MODULE.author = "Pilot"
+MODULE.desc = "Collect cassette's and listen to your favorite tunes."
 
 if (SERVER) then
 	util.AddNetworkString("cOpen")
@@ -18,7 +18,7 @@ if (CLIENT) then
 	net.Receive("cOpen", function(len, client)
 		local entity = net.ReadType()
 		local index = net.ReadUInt(32)
-		local inventory = nut.item.inventories[index]
+		local inventory = lia.item.inventories[index]
 				local inventory2 = LocalPlayer():getChar():getInv()
 
 				local playerInv = inventory2:show()
@@ -30,7 +30,7 @@ if (CLIENT) then
 				cInv:SetTitle("")
 				cInv:MoveLeftOf(playerInv, 4)
 				cInv.OnClose = function(this)
-					if (IsValid(playerInv) and !IsValid(nut.gui.menu)) then
+					if (IsValid(playerInv) and !IsValid(lia.gui.menu)) then
 						playerInv:Remove()
 					end
 					
@@ -66,11 +66,11 @@ if (CLIENT) then
 						netstream.Start("cPlayerDisable", entity)
 					end
 
-				nut.gui["inv"..index] = cInv
+				lia.gui["inv"..index] = cInv
 	end)
 	--[[
 	netstream.Hook("cOpen", function(entity, index)
-		local inventory = nut.item.inventories[index]
+		local inventory = lia.item.inventories[index]
 		local inventory2 = LocalPlayer():getChar():getInv()
 
 		local playerInv = inventory2:show()
@@ -82,7 +82,7 @@ if (CLIENT) then
 		cInv:SetTitle("")
 		cInv:MoveLeftOf(playerInv, 4)
 		cInv.OnClose = function(this)
-			if (IsValid(playerInv) and !IsValid(nut.gui.menu)) then
+			if (IsValid(playerInv) and !IsValid(lia.gui.menu)) then
 				playerInv:Remove()
 			end
 			
@@ -118,11 +118,11 @@ if (CLIENT) then
 				netstream.Start("cPlayerDisable", entity)
 			end
 
-		nut.gui["inv"..index] = cInv
+		lia.gui["inv"..index] = cInv
 	end)
 	--]]
 else
-	function PLUGIN:LoadData()
+	function MODULE:LoadData()
 		local savedTable = self:getData() or {}
 
 		for k, v in ipairs(savedTable) do
@@ -134,7 +134,7 @@ else
 		end
 	end
 
-	function PLUGIN:SaveData()
+	function MODULE:SaveData()
 		local savedTable = {}
 
 		for k, v in ipairs(ents.GetAll()) do

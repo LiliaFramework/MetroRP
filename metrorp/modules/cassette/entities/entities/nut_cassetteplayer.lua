@@ -6,7 +6,7 @@ ENT.AdminOnly = true
 ENT.invType = "cassetteplayer"
 
 Inventory = FindMetaTable("GridInv")
-nut.item.inventories = nut.inventory.instances
+lia.item.inventories = lia.inventory.instances
 
 if (SERVER) then
 
@@ -129,16 +129,16 @@ end
 	function ENT:OnRemove()		
 		local index = self:getNetVar("id")
 
-		if (!nut.shuttingDown and !self.nutIsSafe and index) then
-			--local item = nut.item.inventories[index]
-			local item = nut.inventory.instances[index]
+		if (!lia.shuttingDown and !self.nutIsSafe and index) then
+			--local item = lia.item.inventories[index]
+			local item = lia.inventory.instances[index]
 
 			if (item) then
-				--nut.item.inventories[index] = nil
-				nut.inventory.instances[index] = nil
+				--lia.item.inventories[index] = nil
+				lia.inventory.instances[index] = nil
 
-				nut.db.query("DELETE FROM nut_items WHERE _invID = "..index)
-				nut.db.query("DELETE FROM nut_inventories WHERE _invID = "..index)
+				lia.db.query("DELETE FROM nut_items WHERE _invID = "..index)
+				lia.db.query("DELETE FROM nut_inventories WHERE _invID = "..index)
 
 				hook.Run("StorageItemRemoved", self, item)
 			end
@@ -169,7 +169,7 @@ end
 	end
 
 	function ENT:getInv()
-		return nut.item.inventories[self:getNetVar("id", 0)]
+		return lia.item.inventories[self:getNetVar("id", 0)]
 	end
 
 	netstream.Hook("cPlayerActive", function(client, entity)
@@ -195,8 +195,8 @@ else
 	local COLOR_STOPPED = Color(242, 38, 19)
 	local toScreen = FindMetaTable("Vector").ToScreen
 	local colorAlpha = ColorAlpha
-	local drawText = nut.util.drawText
-	local configGet = nut.config.get
+	local drawText = lia.util.drawText
+	local configGet = lia.config.get
 
 	function ENT:onDrawEntityInfo(alpha)
 		local status = self:getNetVar("songOn")
@@ -214,7 +214,7 @@ else
 		end
 
 		y = y - 20
-		--local tx, ty = nut.util.drawText(locked and "P" or "Q", x, y, colorAlpha(locked and COLOR_LOCKED or COLOR_UNLOCKED, alpha), 1, 1, "nutIconsMedium", alpha * 0.65)
+		--local tx, ty = lia.util.drawText(locked and "P" or "Q", x, y, colorAlpha(locked and COLOR_LOCKED or COLOR_UNLOCKED, alpha), 1, 1, "nutIconsMedium", alpha * 0.65)
 		local tx, ty = drawText(playing, x, y, colorAlpha(playing and playingColor, alpha), 1, 1, nil, alpha * 0.65)
 		y = y + ty*.9
 		local tx, ty = drawText("Cassette Player", x, y, colorAlpha(configGet("color"), alpha), 1, 1, nil, alpha * 0.65)

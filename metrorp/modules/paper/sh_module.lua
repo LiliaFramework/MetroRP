@@ -1,6 +1,6 @@
-PLUGIN.name = "Writing Paper"
-PLUGIN.author = "Black Tea"
-PLUGIN.desc = "Write something on it."
+MODULE.name = "Writing Paper"
+MODULE.author = "Black Tea"
+MODULE.desc = "Write something on it."
 
 local playerMeta = FindMetaTable("Player")
 
@@ -14,14 +14,14 @@ if SERVER then
 		if note:IsValid() then
 			note:setNetVar( "text", text )
 		end
-		nut.log.addRaw(client:Name() .. " wrote " .. data[1])
+		lia.log.addRaw(client:Name() .. " wrote " .. data[1])
 	end)
 
 	function playerMeta:OpenNote( text, entity, private )
 		netstream.Start( self, "Nut_PushNote", {text, entity:EntIndex(), private})
 	end
 	
-	function PLUGIN:LoadData()
+	function MODULE:LoadData()
 		local restored = self:getData()
 
 		if (restored) then
@@ -44,7 +44,7 @@ if SERVER then
 		end
 	end
 
-	function PLUGIN:SaveData()
+	function MODULE:SaveData()
 		local data = {}
 
 		for k, v in pairs(ents.FindByClass("nut_paper")) do
@@ -65,20 +65,20 @@ end
 if CLIENT then
 	
 	
-	function PLUGIN:ShouldDrawTargetEntity(entity)
+	function MODULE:ShouldDrawTargetEntity(entity)
 		if (entity:GetClass() == "nut_paper") then
 			return true
 		end
 	end
 
-	function PLUGIN:DrawTargetID(entity, x, y, alpha)
+	function MODULE:DrawTargetID(entity, x, y, alpha)
 		if (entity:GetClass() == "nut_paper") then
 			local color = Color(255,255,255,255)
 
-			nut.util.drawText(x, y, L"note_name", color)
-				y = y + nut.config.targetTall
+			lia.util.drawText(x, y, L"note_name", color)
+				y = y + lia.config.targetTall
 				local text = L"note_desc"
-			nut.util.drawText(x, y, text, Color(255, 255, 255, alpha))
+			lia.util.drawText(x, y, text, Color(255, 255, 255, alpha))
 		end
 	end
 	
