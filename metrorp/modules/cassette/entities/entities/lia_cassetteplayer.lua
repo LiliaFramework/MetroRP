@@ -185,7 +185,6 @@ else
 	local toScreen = FindMetaTable("Vector").ToScreen
 	local colorAlpha = ColorAlpha
 	local drawText = lia.util.drawText
-	local configGet = lia.config.get
 	function ENT:onDrawEntityInfo(alpha)
 		local status = self:getNetVar("songOn")
 		local position = toScreen(self.LocalToWorld(self, self.OBBCenter(self)))
@@ -202,6 +201,6 @@ else
 		y = y - 20
 		local tx, ty = drawText(playing, x, y, colorAlpha(playing and playingColor, alpha), 1, 1, nil, alpha * 0.65)
 		y = y + ty * .9
-		local tx, ty = drawText("Cassette Player", x, y, colorAlpha(configGet("color"), alpha), 1, 1, nil, alpha * 0.65)
+		local tx, ty = drawText("Cassette Player", x, y, colorAlpha(lia.config.Color, alpha), 1, 1, nil, alpha * 0.65)
 	end
 end

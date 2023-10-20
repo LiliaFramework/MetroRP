@@ -114,11 +114,10 @@ else
 	local toScreen = FindMetaTable("Vector").ToScreen
 	local colorAlpha = ColorAlpha
 	local drawText = lia.util.drawText
-	local configGet = lia.config.get
 	function ENT:onDrawEntityInfo(alpha)
 		local position = toScreen(self.LocalToWorld(self, self.OBBCenter(self)))
 		local x, y = position.x, position.y
-		local x, y = drawText("Camera", x, y, colorAlpha(configGet("color"), alpha), 1, 1, nil, alpha * 0.65)
+		local x, y = drawText("Camera", x, y, colorAlpha(lia.config.Color, alpha), 1, 1, nil, alpha * 0.65)
 	end
 
 	local ScreenshotRequested = false
