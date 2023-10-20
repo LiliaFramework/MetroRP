@@ -4,6 +4,6 @@ local entityMeta = FindMetaTable("Entity")
 function entityMeta:isCamera()
 	local class = self:GetClass()
 
-	return class == "nut_camera"
+	return class == "lia_camera"
 end
 --------------------------------------------------------------------------------------------------------

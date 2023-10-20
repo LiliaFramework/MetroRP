@@ -22,8 +22,8 @@ ITEM.functions.View = {
 		end
 		
 		local readImage = ""
-		if file.Read("nutscript/metro/images/image_"..item:getID()..".txt", "DATA") != nil then
-			readImage = file.Read("nutscript/metro/images/image_"..item:getID()..".txt", "DATA")
+		if file.Read("lilia/metro/images/image_"..item:getID()..".txt", "DATA") != nil then
+			readImage = file.Read("lilia/metro/images/image_"..item:getID()..".txt", "DATA")
 		end
 
 		local html = frame:Add("HTML")

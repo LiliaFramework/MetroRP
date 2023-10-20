@@ -4,14 +4,14 @@ netstream.Hook(
     function(entity, index)
         local inventory = lia.item.inventories[index]
         if IsValid(entity) and inventory and inventory.slots then
-            lia.gui.inv1 = vgui.Create("nutInventory")
+            lia.gui.inv1 = vgui.Create("liaInventory")
             lia.gui.inv1:ShowCloseButton(true)
             local inventory2 = LocalPlayer():getChar():getInv()
             if inventory2 then
                 lia.gui.inv1:setInventory(inventory2)
             end
 
-            local panel = vgui.Create("nutInventory")
+            local panel = vgui.Create("liaInventory")
             panel:ShowCloseButton(true)
             panel:SetTitle("Player")
             panel:setInventory(inventory)

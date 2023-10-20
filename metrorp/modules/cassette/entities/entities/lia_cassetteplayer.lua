@@ -112,7 +112,7 @@ if SERVER then
 
 	function ENT:Use(activator)
 		local inventory = self:getInv()
-		if inventory and (activator.nutNextOpen or 0) < CurTime() then
+		if inventory and (activator.liaNextOpen or 0) < CurTime() then
 			if activator:getChar() then
 				activator:setAction(
 					"Opening...",
@@ -120,7 +120,7 @@ if SERVER then
 					function()
 						if activator:GetPos():Distance(self:GetPos()) <= 100 then
 							self.receivers[activator] = true
-							activator.nutBagEntity = self
+							activator.liaBagEntity = self
 							inventory:sync(activator)
 							net.Start("cOpen")
 							net.WriteType(self)
@@ -132,20 +132,20 @@ if SERVER then
 				)
 			end
 
-			activator.nutNextOpen = CurTime() + 1.5
+			activator.liaNextOpen = CurTime() + 1.5
 		end
 	end
 
 	function ENT:OnRemove()
 		local index = self:getNetVar("id")
-		if not lia.shuttingDown and not self.nutIsSafe and index then
+		if not lia.shuttingDown and not self.liaIsSafe and index then
 			--local item = lia.item.inventories[index]
 			local item = lia.inventory.instances[index]
 			if item then
 				--lia.item.inventories[index] = nil
 				lia.inventory.instances[index] = nil
-				lia.db.query("DELETE FROM nut_items WHERE _invID = " .. index)
-				lia.db.query("DELETE FROM nut_inventories WHERE _invID = " .. index)
+				lia.db.query("DELETE FROM lia_items WHERE _invID = " .. index)
+				lia.db.query("DELETE FROM lia_inventories WHERE _invID = " .. index)
 				hook.Run("StorageItemRemoved", self, item)
 			end
 		end
