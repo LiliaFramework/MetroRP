@@ -1,9 +1,19 @@
 --------------------------------------------------------------------------------------------------------
-MODULE.name = "Cassette Player"
+ENT.Type = "anim"
+ENT.PrintName = "Note"
+ENT.Author = "Black Tea"
+ENT.Spawnable = false
+ENT.AdminOnly = false
+ENT.Category = "Lilia"
+ENT.RenderGroup = RENDERGROUP_BOTH
+ENT.DrawEntityInfo = true
 --------------------------------------------------------------------------------------------------------
-MODULE.author = "Pilot & STEAM_0:1:176123778"
+function ENT:getOwner()
+	return self:getNetVar("ownerChar")
+end
+
 --------------------------------------------------------------------------------------------------------
-MODULE.desc = "Collect cassette's and listen to your favorite tunes."
---------------------------------------------------------------------------------------------------------
-lia.util.include("sv_module.lua")
+function ENT:canWrite(client)
+	if client then return client:IsAdmin() or client:getChar().id == self:getOwner() end
+end
 --------------------------------------------------------------------------------------------------------
