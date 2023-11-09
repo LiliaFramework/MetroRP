@@ -1,4 +1,4 @@
---------------------------------------------------------------------------------------------------------
+﻿--------------------------------------------------------------------------------------------------------
 net.Receive(
     "AM_NightvisionOn",
     function(len, ply)
@@ -14,14 +14,7 @@ net.Receive(
             am_nightvision.Style = 1
         end
 
-        timer.Create(
-            "AM_LightTimer",
-            0.05,
-            0,
-            function()
-                am_nightvision.Pos = LocalPlayer():EyePos()
-            end
-        )
+        timer.Create("AM_LightTimer", 0.05, 0, function() am_nightvision.Pos = LocalPlayer():EyePos() end)
     end
 )
 
@@ -30,9 +23,7 @@ net.Receive(
     "AM_NightvisionOff",
     function(len, ply)
         timer.Remove("AM_LightTimer")
-        if am_nightvision then
-            am_nightvision.DieTime = CurTime() + 0.1
-        end
+        if am_nightvision then am_nightvision.DieTime = CurTime() + 0.1 end
     end
 )
 --------------------------------------------------------------------------------------------------------
