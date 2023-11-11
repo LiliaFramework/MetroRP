@@ -1,0 +1,1 @@
+exclude_files = {"metrorp/modules/cassette/entities/entities/lia_cassetteplayer.lua"}

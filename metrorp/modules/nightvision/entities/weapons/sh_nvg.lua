@@ -1,4 +1,4 @@
---------------------------------------------------------------------------------------------------------
+﻿--------------------------------------------------------------------------------------------------------
 AddCSLuaFile()
 --------------------------------------------------------------------------------------------------------
 SWEP.Base = "weapon_base"
@@ -28,33 +28,33 @@ SWEP.Slot = 3
 SWEP.SlotPos = 4
 --------------------------------------------------------------------------------------------------------
 function SWEP:Initialize()
-	self:SetWeaponHoldType(self.HoldType)
+    self:SetWeaponHoldType(self.HoldType)
 end
 
 --------------------------------------------------------------------------------------------------------
 if SERVER then
-	function SWEP:Reload()
-		if self.NextReload > CurTime() then return end
-		self.NextReload = CurTime() + 2
-		local ply = self:GetOwner()
-		if self.Nightvision == false then
-			self.Nightvision = true
-			net.Start("AM_NightvisionOn")
-			net.Send(ply)
-		elseif self.Nightvision == true then
-			self.Nightvision = false
-			net.Start("AM_NightvisionOff")
-			net.Send(ply)
-		end
-	end
+    function SWEP:Reload()
+        if self.NextReload > CurTime() then return end
+        self.NextReload = CurTime() + 2
+        local ply = self:GetOwner()
+        if self.Nightvision == false then
+            self.Nightvision = true
+            net.Start("AM_NightvisionOn")
+            net.Send(ply)
+        elseif self.Nightvision == true then
+            self.Nightvision = false
+            net.Start("AM_NightvisionOff")
+            net.Send(ply)
+        end
+    end
 
-	function SWEP:OnRemove()
-		if self.Nightvision == true then
-			self.Nightvision = false
-			local ply = self:GetOwner()
-			net.Start("AM_NightvisionOff")
-			net.Send(ply)
-		end
-	end
+    function SWEP:OnRemove()
+        if self.Nightvision == true then
+            self.Nightvision = false
+            local ply = self:GetOwner()
+            net.Start("AM_NightvisionOff")
+            net.Send(ply)
+        end
+    end
 end
 --------------------------------------------------------------------------------------------------------
