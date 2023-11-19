@@ -1,1 +1,7 @@
-﻿goto"skeleton"{"base"}"lilia""title""skeleton""author""""menusystem""1"
+﻿"metrorp"
+{
+	"base"		"lilia"
+	"title"		"metro"
+	"author"	"Leonheart"
+	"category"	"rp"
+}
