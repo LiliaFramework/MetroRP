@@ -1,6 +1,6 @@
 "metrorp"
 {
-	"base"		"sandbox"
+	"base"		"lilia"
 	"title"		"MetroRP"
 	"author"	"Leonheart"
 	"category"	"rp"
