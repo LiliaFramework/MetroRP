@@ -5,7 +5,7 @@ MODULE.searchPanels = MODULE.searchPanels or {}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 net.Receive(
     "RequestID",
-    function(len, ply)
+    function(len, client)
         lia.util.notifQuery(
             "A player is requesting to see your ID.",
             "Accept",
@@ -77,7 +77,7 @@ netstream.Hook(
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 net.Receive(
     "RequestSearch",
-    function(len, ply)
+    function(len, client)
         lia.util.notifQuery(
             "A player is requesting to search your inventory.",
             "Accept",

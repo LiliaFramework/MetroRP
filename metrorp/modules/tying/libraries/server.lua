@@ -98,4 +98,40 @@ function MODULE:PlayerLeaveVehicle(client)
         HandcuffPlayer(client)
     end
 end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function HandcuffPlayer(target)
+    target:SetRunSpeed(target:GetWalkSpeed())
+    for k, v in pairs(target:getChar():getInv():getItems()) do
+        if v.isWeapon and v:getData("equip") then
+            v:setData("equip", nil)
+        end
+    end
+
+    if target.carryWeapons then
+        for _, weapon in pairs(target.carryWeapons) do
+            target:StripWeapon(weapon:GetClass())
+        end
+
+        target.carryWeapons = {}
+    end
+
+    timer.Simple(
+        .2,
+        function()
+            target:SelectWeapon("lia_keys")
+            target:setNetVar("ziptied", true)
+        end
+    )
+    target:StartHandcuffAnim()
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function OnHandcuffRemove(target)
+    target:setNetVar("ziptied", false)
+    target:SetWalkSpeed(lia.config.WalkSpeed)
+    target:SetRunSpeed(lia.config.RunSpeed)
+    hook.Run("ResetSubModuleCuffData", target)
+    target:EndHandcuffAnim()
+end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

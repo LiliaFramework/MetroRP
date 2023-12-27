@@ -10,6 +10,7 @@ function MODULE:SetupInventorySearch(client, target)
     target.liaSearchAccessRule = searcherCanAccess
     target:getChar():getInv():sync(client)
 end
+
 ----------------------------------------------------------------------------------------------
 function MODULE:RemoveInventorySearchPermissions(client, target)
     local rule = target.liaSearchAccessRule
@@ -17,6 +18,7 @@ function MODULE:RemoveInventorySearchPermissions(client, target)
         target:getChar():getInv():removeAccessRule(rule)
     end
 end
+
 ----------------------------------------------------------------------------------------------
 function MODULE:searchPlayer(client, target)
     if IsValid(target:getNetVar("searcher")) or IsValid(client.liaSearchTarget) then
@@ -38,10 +40,12 @@ function MODULE:searchPlayer(client, target)
 
     return true
 end
+
 ----------------------------------------------------------------------------------------------
 function MODULE:CanPlayerInteractItem(client, action, item)
     if IsValid(client:getNetVar("searcher")) then return false end
 end
+
 ----------------------------------------------------------------------------------------------
 function MODULE:stopSearching(client)
     local target = client.liaSearchTarget
@@ -52,6 +56,7 @@ function MODULE:stopSearching(client)
         netstream.Start(client, "searchExit")
     end
 end
+
 ----------------------------------------------------------------------------------------------
 function MODULE:OnPlayerUnRestricted(client)
     local searcher = client:getNetVar("searcher")

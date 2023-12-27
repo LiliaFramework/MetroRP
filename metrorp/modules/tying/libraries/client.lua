@@ -1,32 +1,19 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local MODULE = MODULE
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-netstream.Hook(
-    "searchExit",
-    function(client)
-        MODULE:stopSearching(client)
-    end
-)
+local scrW, scrH = ScrW(), ScrH()
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-net.Receive(
-    "ApproveSearch",
-    function(len, ply)
-        local requester = ply.SearchRequested
-        if not requester then return end
-        if not requester.SearchRequested then return end
-        local approveSearch = net.ReadBool()
-        if not approveSearch then
-            requester:notify("Player denied your request to view their inventory.")
-            requester.SearchRequested = nil
-            ply.SearchRequested = nil
-
-            return
-        end
-
-        if requester:GetPos():DistToSqr(ply:GetPos()) > 250 * 250 then return end
-        MODULE:searchPlayer(requester, ply, true)
-        requester.SearchRequested = nil
-        ply.SearchRequested = nil
+function MODULE:DrawCharInfo(client, character, info)
+    if IsHandcuffed(client) then
+        info[#info + 1] = {"Handcuffed", Color(245, 215, 110)}
     end
-)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function MODULE:HUDPaintBackground()
+    if not LocalPlayer().getChar(LocalPlayer()) then return end
+    if IsHandcuffed(LocalPlayer()) then
+        lia.util.drawText(L"ziptied", scrW * 0.5, scrH * 0.33, nil, 1, 1, "liaBigFont")
+    end
+end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
