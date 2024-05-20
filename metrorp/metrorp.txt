@@ -1,0 +1,6 @@
+"metrorp"
+{
+	"base"		"lilia"
+	"title"		"MetroRP"
+	"author"	"Leonheart"
+}
