@@ -1,7 +1,0 @@
-"metrorp"
-{
-	"base"		"lilia"
-	"title"		"MetroRP"
-	"author"	"Leonheart"
-	"category"	"rp"
-}
