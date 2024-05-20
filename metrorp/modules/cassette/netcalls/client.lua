@@ -1,5 +1,4 @@
-﻿
-net.Receive("cOpen", function(len, client)
+﻿net.Receive("cOpen", function()
     local entity = net.ReadType()
     local index = net.ReadUInt(32)
     local inventory = lia.item.inventories[index]
@@ -11,7 +10,7 @@ net.Receive("cOpen", function(len, client)
     cInv:ShowCloseButton(true)
     cInv:SetTitle("")
     cInv:MoveLeftOf(playerInv, 4)
-    cInv.OnClose = function(this)
+    cInv.OnClose = function()
         if IsValid(playerInv) and not IsValid(lia.gui.menu) then playerInv:Remove() end
         netstream.Start("invExit")
     end
@@ -47,4 +46,3 @@ net.Receive("cOpen", function(len, client)
 
     lia.gui["inv" .. index] = cInv
 end)
-

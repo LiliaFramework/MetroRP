@@ -1,6 +1,4 @@
-﻿
-AddCSLuaFile()
-
+﻿AddCSLuaFile()
 SWEP.Base = "weapon_base"
 SWEP.PrintName = "Night Vision Goggles"
 SWEP.Author = "Tazmily & Leonheart"
@@ -26,35 +24,32 @@ SWEP.Nightvision = false
 SWEP.NextReload = CurTime()
 SWEP.Slot = 3
 SWEP.SlotPos = 4
-
 function SWEP:Initialize()
     self:SetWeaponHoldType(self.HoldType)
 end
-
 
 if SERVER then
     function SWEP:Reload()
         if self.NextReload > CurTime() then return end
         self.NextReload = CurTime() + 2
-        local ply = self:GetOwner()
+        local client = self:GetOwner()
         if self.Nightvision == false then
             self.Nightvision = true
             net.Start("AM_NightvisionOn")
-            net.Send(ply)
-        elseif self.Nightvision == true then
+            net.Send(client)
+        elseif self.Nightvision then
             self.Nightvision = false
             net.Start("AM_NightvisionOff")
-            net.Send(ply)
+            net.Send(client)
         end
     end
 
     function SWEP:OnRemove()
-        if self.Nightvision == true then
+        if self.Nightvision then
             self.Nightvision = false
-            local ply = self:GetOwner()
+            local client = self:GetOwner()
             net.Start("AM_NightvisionOff")
-            net.Send(ply)
+            net.Send(client)
         end
     end
 end
-
