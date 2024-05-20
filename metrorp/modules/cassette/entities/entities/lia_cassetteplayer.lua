@@ -40,22 +40,18 @@ if SERVER then
         self:setNetVar("songOn", false)
         local physObject = self:GetPhysicsObject()
         if IsValid(physObject) then physObject:Wake() end
-        Inventory:instance(
-            {
-                w = 1,
-                h = 1
-            }
-        ):next(
-            function(inventory)
-                self:setInventory(inventory)
-                inventory:addAccessRule(CanOnlyTransferCassette)
-                inventory:addAccessRule(CanReplicateItemsForEveryone)
-                inventory.noBags = false
-                function inventory:onCanTransfer(client, oldX, oldY, x, y, newInvID)
-                    return hook.Run("StorageCanTransfer", inventory, client, oldX, oldY, newInvID)
-                end
+        Inventory:instance({
+            w = 1,
+            h = 1
+        }):next(function(inventory)
+            self:setInventory(inventory)
+            inventory:addAccessRule(CanOnlyTransferCassette)
+            inventory:addAccessRule(CanReplicateItemsForEveryone)
+            inventory.noBags = false
+            function inventory:onCanTransfer(client, oldX, oldY, x, y, newInvID)
+                return hook.Run("StorageCanTransfer", inventory, client, oldX, oldY, newInvID)
             end
-        )
+        end)
     end
 
     function ENT:setInventory(inventory)
@@ -78,16 +74,14 @@ if SERVER then
         for k, v in pairs(itemKey) do
             if v.music ~= nil and self:getNetVar("songOn") == false then
                 self:setNetVar("songOn", true)
-                sound.Add(
-                    {
-                        name = "cplayer_song",
-                        channel = CHAN_STATIC,
-                        volume = 1.0,
-                        level = 80,
-                        pitch = {95, 110},
-                        sound = v.music
-                    }
-                )
+                sound.Add({
+                    name = "cplayer_song",
+                    channel = CHAN_STATIC,
+                    volume = 1.0,
+                    level = 80,
+                    pitch = {95, 110},
+                    sound = v.music
+                })
 
                 self:EmitSound("cplayer_song", 75, 1, 100)
             end
@@ -105,21 +99,17 @@ if SERVER then
         local inventory = self:getInv()
         if inventory and (activator.liaNextOpen or 0) < CurTime() then
             if activator:getChar() then
-                activator:setAction(
-                    "Opening...",
-                    1,
-                    function()
-                        if activator:GetPos():Distance(self:GetPos()) <= 100 then
-                            self.receivers[activator] = true
-                            activator.liaBagEntity = self
-                            inventory:sync(activator)
-                            net.Start("cOpen")
-                            net.WriteType(self)
-                            net.WriteUInt(inventory:getID(), 32)
-                            net.Send(activator)
-                        end
+                activator:setAction("Opening...", 1, function()
+                    if activator:GetPos():Distance(self:GetPos()) <= 100 then
+                        self.receivers[activator] = true
+                        activator.liaBagEntity = self
+                        inventory:sync(activator)
+                        net.Start("cOpen")
+                        net.WriteType(self)
+                        net.WriteUInt(inventory:getID(), 32)
+                        net.Send(activator)
                     end
-                )
+                end)
             end
 
             --netstream.Start(activator, "cOpen", self, inventory:getID())

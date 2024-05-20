@@ -15,14 +15,11 @@ function MODULE:SaveData()
     local savedTable = {}
     for k, v in ipairs(ents.GetAll()) do
         if v:isCassete() then
-            table.insert(
-                savedTable,
-                {
-                    class = v:GetClass(),
-                    pos = v:GetPos(),
-                    ang = v:GetAngles()
-                }
-            )
+            table.insert(savedTable, {
+                class = v:GetClass(),
+                pos = v:GetPos(),
+                ang = v:GetAngles()
+            })
         end
     end
 
