@@ -1,4 +1,4 @@
-﻿--------------------------------------------------------------------------------------------------------
+﻿
 function MODULE:LoadData()
     local savedTable = self:getData() or {}
     for k, v in ipairs(savedTable) do
@@ -10,7 +10,7 @@ function MODULE:LoadData()
     end
 end
 
---------------------------------------------------------------------------------------------------------
+
 function MODULE:SaveData()
     local savedTable = {}
     for k, v in ipairs(ents.GetAll()) do
@@ -25,4 +25,4 @@ function MODULE:SaveData()
 
     self:setData(savedTable)
 end
---------------------------------------------------------------------------------------------------------
+

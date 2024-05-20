@@ -1,20 +1,20 @@
-﻿--------------------------------------------------------------------------------------------------------
+﻿
 ENT.Type = "anim"
---------------------------------------------------------------------------------------------------------
+
 ENT.PrintName = "Cassette Player"
---------------------------------------------------------------------------------------------------------
+
 ENT.Category = "Lilia"
---------------------------------------------------------------------------------------------------------
+
 ENT.Spawnable = true
---------------------------------------------------------------------------------------------------------
+
 ENT.AdminOnly = true
---------------------------------------------------------------------------------------------------------
+
 ENT.invType = "cassetteplayer"
---------------------------------------------------------------------------------------------------------
+
 ENT.DrawEntityInfo = true
---------------------------------------------------------------------------------------------------------
+
 local Inventory = FindMetaTable("GridInv")
---------------------------------------------------------------------------------------------------------
+
 lia.item.inventories = lia.inventory.instances
 if SERVER then
     local function CanOnlyTransferCassette(inventory, action, context)
@@ -112,7 +112,6 @@ if SERVER then
                 end)
             end
 
-            --netstream.Start(activator, "cOpen", self, inventory:getID())
             activator.liaNextOpen = CurTime() + 1.5
         end
     end
@@ -120,10 +119,8 @@ if SERVER then
     function ENT:OnRemove()
         local index = self:getNetVar("id")
         if not lia.shuttingDown and not self.liaIsSafe and index then
-            --local item = lia.item.inventories[index]
             local item = lia.inventory.instances[index]
             if item then
-                --lia.item.inventories[index] = nil
                 lia.inventory.instances[index] = nil
                 lia.db.query("DELETE FROM lia_items WHERE _invID = " .. index)
                 lia.db.query("DELETE FROM lia_inventories WHERE _invID = " .. index)
