@@ -1,5 +1,5 @@
 file = {
-	"skeleton",
+	"metrorp",
 }
 
 dir = "docs/html"
