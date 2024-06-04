@@ -1,7 +1,9 @@
-# MetroRP
+<h1 align="center">MetroRP Schema</h1>
 
-MetroRP is a roleplay schema for [Lilia](https://github.com/LiliaFramework/Lilia).
-
+<p align="center">
+  <img src="https://i.imgur.com/yY3wT30.png" alt="Lilia Icon">
+</p>
+ 
 # Contents
 - Cassette Player
   
