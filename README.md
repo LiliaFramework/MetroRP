@@ -1,6 +1,6 @@
-# Lilia MetroRP
+# MetroRP
 
-MetroRP is a roleplay schema for [Lilia](https://github.com/LiliaFramework/Lilia). Its aim is to provide a stable MetroRP schema to start your server creation with.
+MetroRP is a roleplay schema for [Lilia](https://github.com/LiliaFramework/Lilia).
 
 # Support
 
