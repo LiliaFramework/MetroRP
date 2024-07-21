@@ -11,8 +11,8 @@ end
 
 function MODULE:SaveData()
     local savedTable = {}
-    for _, v in ipairs(ents.GetAll()) do
-        if v:isCassete() then
+    for _, v in ents.Iterator() do
+        if v.isCasseteReader then
             table.insert(savedTable, {
                 class = v:GetClass(),
                 pos = v:GetPos(),
