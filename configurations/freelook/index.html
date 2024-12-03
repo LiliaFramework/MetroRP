@@ -2,13 +2,13 @@
 
 <html>
 	<head>
-		<title>Notes - Skeleton Documentation</title>
+		<title>FreeLook - Skeleton Documentation</title>
 
 		<meta property="og:type" content="website" />
-		<meta property="og:title" content="Notes - Skeleton Documentation" />
+		<meta property="og:title" content="FreeLook - Skeleton Documentation" />
 		<meta property="og:site_name" content="MetroRP Documentation" />
 
-			<meta property="og:description" content="Configuration for Notes Module." />
+			<meta property="og:description" content="Configuration for Free Look Module." />
 
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro" />
 		<link rel="stylesheet" href="../../ldoc.css" />
@@ -31,22 +31,6 @@
 					</summary>
 
 					<ul>
-							<li>
-									<details open>
-									<summary><a href="../../hooks/notes/">Notes</a></summary>
-
-									<ul>
-
-
-										<li>
-											<span class="realm server"></span>
-											<a href="../../hooks/notes/#OnNoteSpawned">
-OnNoteSpawned											</a>
-										</li>
-
-									</ul>
-									</details>
-							</li>
 							<li>
 									<details >
 									<summary><a href="../../hooks/radio/">Radio</a></summary>
@@ -101,6 +85,17 @@ StartHandcuffAnim											</a>
 
 					<ul>
 							<li>
+									<details open>
+									<summary><a href="../../configurations/freelook/">FreeLook</a></summary>
+
+									<ul>
+
+
+
+									</ul>
+									</details>
+							</li>
+							<li>
 									<details >
 									<summary><a href="../../configurations/lilia/">Lilia</a></summary>
 
@@ -114,17 +109,6 @@ StartHandcuffAnim											</a>
 							<li>
 									<details >
 									<summary><a href="../../configurations/mapcleaner/">MapCleaner</a></summary>
-
-									<ul>
-
-
-
-									</ul>
-									</details>
-							</li>
-							<li>
-									<details open>
-									<summary><a href="../../configurations/notes/">Notes</a></summary>
 
 									<ul>
 
@@ -163,8 +147,8 @@ StartHandcuffAnim											</a>
 			<article>
 					<div class="wrapper">
 						<header class="module">
-	<h1>Notes</h1>
-	<h2>Configuration for Notes Module.</h2>
+	<h1>FreeLook</h1>
+	<h2>Configuration for Free Look Module.</h2>
 </header>
 
 <p>
@@ -179,7 +163,7 @@ StartHandcuffAnim											</a>
 					<h1><span class="realm shared"></span></span>Configuration</h1>
 				</a>
 
-					<p>This table defines the default settings for the Notes Module.</p>
+					<p>This table defines the default settings for the Free Look Module.</p>
 			</header>
 
 
@@ -189,11 +173,55 @@ StartHandcuffAnim											</a>
 					<ul>
 
 							<li>
-								<span class="tag parameter">NoteLimit</span>
+								<span class="tag parameter">FreelookLimV</span>
 
 
 
-								<p> The maximum number of characters a note can have | <strong>number</strong></p>
+								<p> Specifies the limit of vertical movement of the camera | <strong>number</strong></p>
+							</li>
+					</ul>
+
+					<ul>
+
+							<li>
+								<span class="tag parameter">FreelookLimH</span>
+
+
+
+								<p> Specifies the limit of horizontal movement of the camera | <strong>number</strong></p>
+							</li>
+					</ul>
+
+					<ul>
+
+							<li>
+								<span class="tag parameter">FreelookSmooth</span>
+
+
+
+								<p> Specifies the smoothness of camera turns | <strong>number</strong></p>
+							</li>
+					</ul>
+
+					<ul>
+
+							<li>
+								<span class="tag parameter">FreelookBlockADS</span>
+
+
+
+								<p> Specifies whether the camera should return to the default position when pressing LMB (left mouse button) | <strong>boolean</strong></p>
+							</li>
+					</ul>
+
+					<ul>
+
+							<li>
+								<span class="tag parameter">FreelookEnabled</span>
+
+
+
+								<p> Specifies whether freelook mode is enabled | <strong>boolean</strong></p>
 							</li>
 					</ul>
 
