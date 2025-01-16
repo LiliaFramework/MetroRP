@@ -1,4 +1,4 @@
-local FreeLookEnabled = CreateClientConVar("freelook_enabled", 0, true)
+﻿local FreeLookEnabled = CreateClientConVar("freelook_enabled", 0, true)
 local freelooking, LookX, LookY, InitialAng, CoolAng, ZeroAngle = false, 0, 0, Angle(), Angle(), Angle()
 function MODULE:Isinsights(client)
     local weapon = client:GetActiveWeapon()
