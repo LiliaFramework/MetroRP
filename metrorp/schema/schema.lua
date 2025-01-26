@@ -1,8 +1,4 @@
-﻿--[[--
-    Schema configuration options.
-
-    This is meant to define the Schema's default information.
-]]
+﻿
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
