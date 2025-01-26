@@ -4,6 +4,7 @@
     This is meant to define the Schema's default information.
 ]]
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 -- @configuration Schema
 --- A list of schema fields that define the gamemode you are making.
 -- These options are defined by the 'SCHEMA' table.
@@ -13,6 +14,8 @@
 -- @field author Specifies the author of the schema | **string**
 -- @field desc Defines the description of the schema | **string**
 =======
+=======
+>>>>>>> Stashed changes
 
 
 
@@ -22,6 +25,9 @@
 
 
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 SCHEMA.name = "MetroRP"
 SCHEMA.author = "76561198312513285"
